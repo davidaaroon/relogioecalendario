@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relógio</title>
+    <script type="text/javascript">
+        Number.prototype.pad = function(n) {
+          for (var r = this.toString(); r.length < n; r = 0 + r);
+          return r;
+        };
+
+        function updateClock() {
+            var now = new Date();
+            var milisegundos = now.getMilliseconds(),
+                segundo = now.getSeconds(),
+                minuto = now.getMinutes(),
+                hora = now.getHours(),
+                mes = now.getMonth(),
+                dia = now.getDate(),
+                ano = now.getFullYear();
+            var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setemtbro", "Outubro", "Novembro", "Dezembro"];
+            var data_tualizada = meses[mes] + " " + dia + ", " + ano;
+            var hora_tualizada = hora.pad(2) + ":" + minuto.pad(2) + ":" + segundo.pad(2) + ":" + milisegundos;
+                
+            document.getElementById("data_atualizada").innerHTML = data_tualizada;
+            document.getElementById("hora_atualizada").innerHTML = hora_tualizada;
+        }
+
+        function initClock() {
+          updateClock();
+          window.setInterval("updateClock()", 1);
+        }  
+    </script>
+
+    <!-- <script src="assets/js/java.js"></script> -->
+</head>
+<body onLoad="initClock()">
+  <div id="data_atualizada">Data</div>
+  <div id="hora_atualizada">Hora</div>
+</body>
+</html>
